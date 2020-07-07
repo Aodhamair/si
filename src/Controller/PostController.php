@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 
 class PostController extends AbstractController
@@ -36,6 +37,25 @@ class PostController extends AbstractController
         }
 
         return $this->render('post/form.html.twig', ['form'=>$form->createView()]); /*wygenerowanie widoku i prekazanie widoku formularza, który się sam robi, bo symfony jest mondre.*/
+    }
+
+    /**
+     * @Route("/post/{id}/delete",name="post_delete", methods={"GET","DELETE"})
+     */
+    public function delete(PostsRepository $repository, Request $request, Posts $post) {
+        $form = $this->createForm(FormType::class, $post, ['method'=>'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository->delete($post);
+            return $this->redirectToRoute("posts");
+        }
+
+        return $this->render('post/delete.html.twig', ['form'=>$form->createView(), "post"=>$post]);
     }
 
 }

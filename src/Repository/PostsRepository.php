@@ -32,6 +32,12 @@ class PostsRepository extends ServiceEntityRepository
         ;
     }
 
+    public function delete(Posts $post): void
+    {
+        $this->_em->remove($post);
+        $this->_em->flush($post);
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Posts
