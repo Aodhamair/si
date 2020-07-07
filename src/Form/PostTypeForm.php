@@ -6,6 +6,7 @@ namespace App\Form;
 
 use App\Entity\Posts;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +17,8 @@ class PostTypeForm extends AbstractType
         $builder
             -> add('title')
             -> add('content')
-            -> add('createdAt');
+            -> add('createdAt')
+            -> add('save', SubmitType::class, ['label'=>'Zapisz']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
