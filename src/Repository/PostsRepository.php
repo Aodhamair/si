@@ -32,11 +32,18 @@ class PostsRepository extends ServiceEntityRepository
         ;
     }
 
+    public function save(Posts $post): void
+    {
+        $this->_em->persist($post);
+        $this->_em->flush($post);
+    }
+
     public function delete(Posts $post): void
     {
         $this->_em->remove($post);
         $this->_em->flush($post);
     }
+
 
 
     /*

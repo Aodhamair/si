@@ -13,36 +13,43 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 
+/**
+ * @Route("/posts")
+ */
 class PostController extends AbstractController
 {
     /**
-     * @Route("/post",name="posts")
+     * @Route("/",name="posts")
      */
-    public function index(PostsRepository $repository) {
+    public function index(PostsRepository $repository)
+    {
         $posts = $repository->findAndOrderByDate();
         return $this->render('post/index.html.twig', ['posts'=>$posts]);
     }
 
     /**
-     * @Route("/post/new",name="post_new")
+     * @Route("/new",name="post_new")
      */
-    public function new(Request $request, EntityManagerInterface $manager) {
+    public function new(Request $request, PostsRepository $repository)
+    {
         $post = new Posts(); /*obiekt*/
         $form = $this->createForm(PostTypeForm::class, $post); /*stworzyliśmy zmienną formularza na podstawie PostTypeForm i wkazałyśmy jej obiekt*/
         $form->handleRequest($request); /*przechwycimy request, eby wsadzić go do obiektu*/
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($post);
-            $manager->flush(); /*jak formularz jest ok, to obiekt leci w bazę*/
+            $repository->save($post);
+            $this->addFlash('success', 'message_created_successfully');
+            return $this->redirectToRoute("posts");
         }
 
         return $this->render('post/form.html.twig', ['form'=>$form->createView()]); /*wygenerowanie widoku i prekazanie widoku formularza, który się sam robi, bo symfony jest mondre.*/
     }
 
     /**
-     * @Route("/post/{id}/delete",name="post_delete", methods={"GET","DELETE"})
+     * @Route("/{id}/delete",name="post_delete", methods={"GET","DELETE"})
      */
-    public function delete(PostsRepository $repository, Request $request, Posts $post) {
+    public function delete(PostsRepository $repository, Request $request, Posts $post)
+    {
         $form = $this->createForm(FormType::class, $post, ['method'=>'DELETE']);
         $form->handleRequest($request);
 
@@ -52,10 +59,27 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repository->delete($post);
+            $this->addFlash('success', 'message_deleted_successfully');
             return $this->redirectToRoute("posts");
         }
 
         return $this->render('post/delete.html.twig', ['form'=>$form->createView(), "post"=>$post]);
     }
 
+    /**
+     * @Route("/{id}/edit",name="post_edit", methods={"GET","PUT"})
+     */
+    public function edit(PostsRepository $repository, Request $request, Posts $post)
+    {
+        $form = $this->createForm(PostTypeForm::class, $post, ['method'=>'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository->save($post);
+            $this->addFlash('success', 'message_edited_successfully');
+            return $this->redirectToRoute("posts");
+        }
+
+        return $this->render('post/form.html.twig', ['form'=>$form->createView()]);
+    }
 }

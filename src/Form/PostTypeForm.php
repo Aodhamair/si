@@ -17,7 +17,6 @@ class PostTypeForm extends AbstractType
         $builder
             -> add('title')
             -> add('content')
-            -> add('createdAt')
             -> add('save', SubmitType::class, ['label'=>'Zapisz']);
     }
 
