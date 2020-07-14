@@ -25,6 +25,25 @@ class CategoryController extends AbstractController
     }
 
 
+
+    /**
+     * @Route("/new",name="category_new")
+     */
+    public function new(Request $request, CategoryRepository $repository)
+    {
+        $category = new Category(); /*obiekt*/
+        $form = $this->createForm(CategoryTypeForm::class, $category); /*stworzyliśmy zmienną formularza na podstawie CtegoryTypeForm i wkazałyśmy jej obiekt*/
+        $form->handleRequest($request); /*przechwycimy request, żeby wsadzić go do obiektu*/
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository->save($category);
+            $this->addFlash('success', 'message_created_successfully');
+            return $this->redirectToRoute("category");
+        }
+
+        return $this->render('category/form.html.twig', ['form'=>$form->createView()]); /*wygenerowanie widoku i prekazanie widoku formularza, który się sam robi, bo symfony jest mondre.*/
+    }
+
     /**
      * @Route("/{id}/delete",name="category_delete", methods={"GET","DELETE"})
      */

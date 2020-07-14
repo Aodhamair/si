@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Entity\Posts;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,20 @@ class CategoryRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
+    }
+
+
+    public function save(Category $category): void
+    {
+        $this->_em->persist($category);
+        $this->_em->flush($category);
+    }
+
+
+    public function delete(Category $category): void
+    {
+        $this->_em->remove($category);
+        $this->_em->flush($category);
     }
 
     // /**

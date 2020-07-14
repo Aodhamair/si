@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for category in categories %}
+        <h1>{{ category.name }}</h1> <a href="{{ url('category_edit',{id:category.id}) }}">EDYTUJ</a>
+    {% endfor %}
+
+{% endblock %}

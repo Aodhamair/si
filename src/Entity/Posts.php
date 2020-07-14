@@ -40,8 +40,10 @@ class Posts
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $category;
+
 
     public function getId(): ?int
     {
