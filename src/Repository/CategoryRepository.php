@@ -5,7 +5,9 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\Posts;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -32,6 +34,25 @@ class CategoryRepository extends ServiceEntityRepository
     {
         $this->_em->remove($category);
         $this->_em->flush($category);
+    }
+
+    public function postList(Category $categoryId) : QueryBuilder
+    {
+//        return $post->createQueryBuilder('c')
+//
+//            ->andWhere('c.exampleField = :val')
+//            ->setParameter('val', $categoryId)
+//            ->getQuery()
+//            ->getResult()
+//            ;
+        $queryBuilder = $this->createQueryBuilder('Posts')
+            ->andWhere('Posts.category = :categoryId')
+            ->setParameter('categoryId', $categoryId)
+            ->getQuery()
+            ->getResult()
+            ;
+        return $queryBuilder;
+
     }
 
     // /**
@@ -73,4 +94,6 @@ class CategoryRepository extends ServiceEntityRepository
      * @constant int
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;
+
+
 }
