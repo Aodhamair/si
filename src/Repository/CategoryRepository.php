@@ -45,12 +45,13 @@ class CategoryRepository extends ServiceEntityRepository
 //            ->getQuery()
 //            ->getResult()
 //            ;
-        $queryBuilder = $this->createQueryBuilder('Posts')
-            ->andWhere('Posts.category = :categoryId')
-            ->setParameter('categoryId', $categoryId)
-            ->getQuery()
-            ->getResult()
-            ;
+        $queryBuilder = $this->createQueryBuilder()
+
+            ->join('Posts.category= :categoryId')
+            ->setParameter('categoryId', $categoryId);
+
+
+
         return $queryBuilder;
 
     }

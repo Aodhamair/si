@@ -96,7 +96,7 @@ class CategoryController extends AbstractController
         dump($repository->postList($category));
 
             $pagination = $paginator->paginate(
-            $repository->postList($this->$category),
+            $repository->postList($category),
             $request->query->getInt('page', 1),
             CategoryRepository::PAGINATOR_ITEMS_PER_PAGE,
     );
