@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Posts;
+use App\Entity\Category;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -58,6 +60,29 @@ class PostsRepository extends ServiceEntityRepository
         $this->_em->flush($post);
     }
 
+
+    public function postList(Category $categoryId) : QueryBuilder
+    {
+//        return $post->createQueryBuilder('c')
+//
+//            ->andWhere('c.exampleField = :val')
+//            ->setParameter('val', $categoryId)
+//            ->getQuery()
+//            ->getResult()
+//            ;
+        $queryBuilder = $this->createQueryBuilder('p')
+
+//            ->join('c.Id','posts','with','Posts.category= :categoryId')
+            ->join('App\Entity\Category','c')
+            ->andWhere('p.category=:categoryId')
+            ->setParameter('categoryId', $categoryId);
+
+
+
+
+        return $queryBuilder;
+
+    }
 
 
     /*

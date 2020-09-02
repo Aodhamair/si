@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryTypeForm;
 use App\Repository\CategoryRepository;
+use App\Repository\PostsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,15 +92,17 @@ class CategoryController extends AbstractController
     /**
      * @Route("/{id}",name="category_posts", methods={"GET"}, requirements={"id":"[1-9]\d*"})
      */
-    public function showPosts(Category $category, CategoryRepository $repository, Request $request,  PaginatorInterface $paginator) : Response
+    public function showPosts(Category $category, PostsRepository $repository, Request $request,  PaginatorInterface $paginator) : Response
     {
         dump($repository->postList($category));
+
 
             $pagination = $paginator->paginate(
             $repository->postList($category),
             $request->query->getInt('page', 1),
             CategoryRepository::PAGINATOR_ITEMS_PER_PAGE,
     );
+        dump($pagination);
         return $this->render('category/post_category.html.twig',
             ['pagination' => $pagination]);
     }

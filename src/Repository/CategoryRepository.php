@@ -20,6 +20,7 @@ class CategoryRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
+
     }
 
 
@@ -36,25 +37,7 @@ class CategoryRepository extends ServiceEntityRepository
         $this->_em->flush($category);
     }
 
-    public function postList(Category $categoryId) : QueryBuilder
-    {
-//        return $post->createQueryBuilder('c')
-//
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $categoryId)
-//            ->getQuery()
-//            ->getResult()
-//            ;
-        $queryBuilder = $this->createQueryBuilder()
 
-            ->join('Posts.category= :categoryId')
-            ->setParameter('categoryId', $categoryId);
-
-
-
-        return $queryBuilder;
-
-    }
 
     // /**
     //  * @return Category[] Returns an array of Category objects

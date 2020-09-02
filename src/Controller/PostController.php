@@ -64,6 +64,20 @@ class PostController extends AbstractController
     }
 
     /**
+     * @Route("/{id}",
+     *     name="post_show",
+     *     methods={"GET"},
+     *     requirements={"id": "[1-9]\d*"})
+     */
+    public function show(Posts $post): Response
+    {
+        return $this->render(
+            'post/show.html.twig',
+            ['post' => $post]
+        );
+    }
+
+    /**
      * @Route("/{id}/delete",name="post_delete", methods={"GET","DELETE"})
      */
     public function delete(PostsRepository $repository, Request $request, Posts $post)

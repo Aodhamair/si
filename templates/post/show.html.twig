@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_post_details'|trans({'%id%': post.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{  post.title }}</h1>
+    {% if post is defined and post|length %}
+        <dl class="dl-horizontal">
+            {{ 'stworzono o'|trans }} {{ post.createdAt|date('Y/m/d') }}
+
+            <dd>{{  post.content }}</dd>
+        </dl>
+        <p>
+            <a href="{{ url('posts') }}" title="{{ 'action_back_to_list'|trans }}">
+                {{ 'action_back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message_item_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
