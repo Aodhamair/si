@@ -47,4 +47,21 @@ class CommentsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function saveComment(Comments $comment): void
+    {
+        $this->_em->persist($comment);
+        $this->_em->flush($comment);
+    }
+
+
+    public function deleteComment(Comments $comment): void
+    {
+        $this->_em->remove($comment);
+        $this->_em->flush($comment);
+    }
+
+
+
 }

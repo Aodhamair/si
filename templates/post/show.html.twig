@@ -12,7 +12,9 @@
 
             <dd>{{  post.content }}</dd>
         </dl>
-        <p>
+
+
+       <p>
             <a href="{{ url('posts') }}" title="{{ 'action_back_to_list'|trans }}">
                 {{ 'action_back_to_list'|trans }}
             </a>
@@ -22,4 +24,17 @@
             {{ 'message_item_not_found'|trans }}
         </p>
     {% endif %}
+
+    {{ form(form) }}
+
+    <h4>Komentarze</h4>
+    {% for comment in post.comments %}
+
+        <p><b>{{ comment.nick }}</b></p>
+        <p><i>{{ comment.email }}</i></p>
+        <p>{{ comment.content }}</p>
+
+    {% endfor %}
+
+
 {% endblock %}

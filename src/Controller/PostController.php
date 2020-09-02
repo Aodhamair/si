@@ -4,8 +4,10 @@
 namespace App\Controller;
 
 use App\Entity\Posts;
+use App\Entity\Comments;
 use App\Form\PostTypeForm;
 use App\Repository\PostsRepository;
+use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
+use App\Form\CommentTypeForm;
 
 
 /**
@@ -44,7 +47,6 @@ class PostController extends AbstractController
     }
 
 
-
     /**
      * @Route("/new",name="post_new")
      */
@@ -66,14 +68,32 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}",
      *     name="post_show",
-     *     methods={"GET"},
+     *     methods={"GET","POST"},
      *     requirements={"id": "[1-9]\d*"})
      */
-    public function show(Posts $post): Response
+    public function show(Posts $post, PostsRepository $postRepository, Request $request, CommentsRepository $commentRepository): Response
     {
+
+        $comments = $postRepository->PostComments($post);
+        dump($comments);
+
+        $comment = new Comments(); /*obiekt*/
+        $comment->setPost($post);
+        $form = $this->createForm(CommentTypeForm::class, $comment);
+        $form->handleRequest($request); /*przechwycimy request, eby wsadzić go do obiektu*/
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $commentRepository->saveComment($comment);
+            $this->addFlash('success', 'message_created_successfully');
+            return $this->redirectToRoute("posts");
+        }
+
         return $this->render(
             'post/show.html.twig',
-            ['post' => $post]
+            ['post' => $post,
+            'comments' => $comments,
+            'form'=>$form->createView()]
         );
     }
 
@@ -114,4 +134,7 @@ class PostController extends AbstractController
 
         return $this->render('post/form.html.twig', ['form'=>$form->createView()]);
     }
+
+
+
 }

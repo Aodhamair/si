@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Posts;
 use App\Entity\Category;
+use App\Entity\Comments;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -77,13 +78,19 @@ class PostsRepository extends ServiceEntityRepository
             ->andWhere('p.category=:categoryId')
             ->setParameter('categoryId', $categoryId);
 
-
-
-
         return $queryBuilder;
 
     }
 
+    public function PostComments(Posts $post) : QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+        ->join('App\Entity\Comments','com')
+        ->andWhere('p.comments=:post')
+        ->setParameter('post', $post);
+        dump($queryBuilder);
+        return $queryBuilder;
+}
 
     /*
     public function findOneBySomeField($value): ?Posts
