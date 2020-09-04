@@ -88,7 +88,7 @@ class PostsRepository extends ServiceEntityRepository
         ->join('App\Entity\Comments','com')
         ->andWhere('p.comments=:post')
         ->setParameter('post', $post);
-        dump($queryBuilder);
+
         return $queryBuilder;
 }
 

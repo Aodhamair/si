@@ -75,8 +75,6 @@ class PostController extends AbstractController
     {
 
         $comments = $postRepository->PostComments($post);
-        dump($comments);
-
         $comment = new Comments(); /*obiekt*/
         $comment->setPost($post);
         $form = $this->createForm(CommentTypeForm::class, $comment);

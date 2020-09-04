@@ -8,5 +8,12 @@
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        {%  block footer %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ url('app_logout') }}">WYLOGUJ SIĘ</a>
+        {% else %}
+            <a href="{{ url('app_login') }}">ZALOGUJ SIĘ</a>
+        {% endif %}
+        {% endblock %}
     </body>
 </html>

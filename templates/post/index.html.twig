@@ -11,7 +11,13 @@
        <h1>  <a href="{{ url('post_show', {id: post.id}) }}" title="{{ post.title }}">
              {{ post.title }}</a></h1>
         <p>{{ post.content }}</p>
-        <p>{{ post.createdAt|date('d-m-Y')}} +++ <a href="{{ url('post_edit',{id:post.id}) }}">EDYTUJ</a> +++ <a href="{{ url('post_delete',{id:post.id}) }}">USUŃ</a> </p>
+        <p>{{ post.createdAt|date('d-m-Y')}}
+
+            {% if is_granted('ROLE_ADMIN') %}
+              +++ <a href="{{ url('post_edit',{id:post.id}) }}">EDYTUJ</a> +++
+              <a href="{{ url('post_delete',{id:post.id}) }}">USUŃ</a> </p>
+        {% endif %}
+
     {% endfor %}
 
 

@@ -5,7 +5,11 @@
 
     {% for category in categories %}
         <a href="{{ url('category_posts', {id: category.id}) }}"><h1>{{ category.name }}</h1></a>
-        <a href="{{ url('category_edit',{id:category.id}) }}">EDYTUJ</a>
+
+        {% if is_granted('ROLE_ADMIN') %}
+         <a href="{{ url('category_edit',{id:category.id}) }}">EDYTUJ</a>
+        {% endif %}
+
     {% endfor %}
 
 {% endblock %}
