@@ -8,7 +8,7 @@
     <h1>{{  post.title }}</h1>
     {% if post is defined and post|length %}
         <dl class="dl-horizontal">
-            {{ 'stworzono o'|trans }} {{ post.createdAt|date('Y/m/d') }}
+            {{ 'label_created_at'|trans }} {{ post.createdAt|date('d/m/Y') }}
 
             <dd>{{  post.content }}</dd>
         </dl>
@@ -27,7 +27,7 @@
 
     {{ form(form) }}
 
-    <h4>Komentarze</h4>
+    <h4>{{ 'label_comments'|trans }}</h4>
     {% for comment in post.comments %}
 
         <p><b>{{ comment.nick }}</b></p>

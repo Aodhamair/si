@@ -6,6 +6,10 @@
             <source>label_actions</source>
             <target>Akcje</target>
         </trans-unit>
+        <trans-unit id="action_back_to_list">
+            <source>action_back_to_list</source>
+            <target>Wróć do listy</target>
+        </trans-unit>
         <trans-unit id="label_id">
             <source>label_id</source>
             <target>Id</target>
@@ -58,7 +62,22 @@
             <source>label_passw</source>
             <target>Hasło </target>
         </trans-unit>
-
+        <trans-unit id="label_created_at">
+            <source>label_created_at</source>
+            <target>Stworzono: </target>
+        </trans-unit>
+        <trans-unit id="label_comments">
+            <source>label_comments</source>
+            <target>Komentarze: </target>
+        </trans-unit>
+        <trans-unit id="label_delete">
+            <source>label_delete</source>
+            <target>USUŃ</target>
+        </trans-unit>
+        <trans-unit id="label_edit">
+            <source>label_edit</source>
+            <target>EDYTUJ</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>
