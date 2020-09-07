@@ -10,9 +10,9 @@
         {% block javascripts %}{% endblock %}
         {%  block footer %}
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ url('app_logout') }}">WYLOGUJ SIĘ</a>
+            <a href="{{ url('app_logout') }}">{{ 'label_logout'|trans }}</a>
         {% else %}
-            <a href="{{ url('app_login') }}">ZALOGUJ SIĘ</a>
+            <a href="{{ url('app_login') }}">{{ 'label_login'|trans }}</a>
         {% endif %}
         {% endblock %}
     </body>

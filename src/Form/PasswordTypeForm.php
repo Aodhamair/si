@@ -38,9 +38,9 @@ class PasswordTypeForm extends AbstractType
                 'second_options' => ['label' => 'powtórz hasło'],
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ])
+            ]);
 
-        -> add('save', SubmitType::class, ['label'=>'Zapisz']);
+//        -> add('save', SubmitType::class, ['label'=>'Zapisz']);
     }
 
     /**
@@ -63,6 +63,6 @@ class PasswordTypeForm extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'account';
+        return 'change_password';
     }
 }

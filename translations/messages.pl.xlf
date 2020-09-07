@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="pl" datatype="plaintext" original="file.ext">
+        <body>
+        <trans-unit id="label_actions">
+            <source>label_actions</source>
+            <target>Akcje</target>
+        </trans-unit>
+        <trans-unit id="label_id">
+            <source>label_id</source>
+            <target>Id</target>
+        </trans-unit>
+        <trans-unit id="label_title">
+            <source>label_title</source>
+            <target>Tytuł</target>
+        </trans-unit>
+        <trans-unit id="label_content">
+            <source>label_content</source>
+            <target>Zawartość</target>
+        </trans-unit>
+        <trans-unit id="label_tags">
+            <source>label_tags</source>
+            <target>Tagi</target>
+        </trans-unit>
+        <trans-unit id="message_empty_list">
+            <source>message_empty_list</source>
+            <target>Pusta lista</target>
+        </trans-unit>
+        <trans-unit id="title_record_list">
+            <source>title_record_list</source>
+            <target>Lista rekordów</target>
+        </trans-unit>
+        <trans-unit id="label_hello">
+            <source>label_hello</source>
+            <target>Witojcie!</target>
+        </trans-unit>
+        <trans-unit id="label_logout">
+            <source>label_logout</source>
+            <target>Wylogujta się!</target>
+        </trans-unit>
+        <trans-unit id="label_login">
+            <source>label_login</source>
+            <target>Zalogujta się!</target>
+        </trans-unit>
+        <trans-unit id="label_loginmessage">
+            <source>label_loginmessage</source>
+            <target>Zalogowano, jako </target>
+        </trans-unit>
+        <trans-unit id="label_pls_sign_in">
+            <source>label_pls_sign_in</source>
+            <target>Zaloguj się!</target>
+        </trans-unit>
+        <trans-unit id="label_email">
+            <source>label_email</source>
+            <target>Email </target>
+        </trans-unit>
+        <trans-unit id="label_passw">
+            <source>label_passw</source>
+            <target>Hasło </target>
+        </trans-unit>
+
+        </body>
+    </file>
+</xliff>
