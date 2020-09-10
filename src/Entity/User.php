@@ -86,10 +86,9 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string")
-
-     * @Assert\NotBlank
+     *
      * @Assert\Type(type="string")
-     * @SecurityAssert\UserPassword
+
      */
     private $password;
 
@@ -134,6 +133,8 @@ class User implements UserInterface
     {
         return (string) $this->email;
     }
+
+
 
     /**
      * Getter for the Roles.

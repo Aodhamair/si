@@ -29,11 +29,12 @@
 
     <h4>{{ 'label_comments'|trans }}</h4>
     {% for comment in post.comments %}
-
-        <p><b>{{ comment.nick }}</b></p>
-        <p><i>{{ comment.email }}</i></p>
-        <p>{{ comment.content }}</p>
-
+<div style="border: dotted; border-color: #000000; width: 600px;">
+        <p style="padding: 10px 5px 0px 0px;"><b>{{ 'label_nick'|trans }}{{ comment.nick }}</b></p>
+        <p style="padding: 10px 5px 0px 0px;"><i>{{ 'label_email'|trans }}{{ comment.email }}</i></p>
+        <p style="padding: 30px 30px 30px 30px;">{{ comment.content }}</p>
+</div>
+<hr style="color: red;">
     {% endfor %}
 
 

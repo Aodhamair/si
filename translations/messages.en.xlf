@@ -78,6 +78,18 @@
             <source>label_edit</source>
             <target>EDIT</target>
         </trans-unit>
+        <trans-unit id="action_save">
+            <source>action_save</source>
+            <target>Save!</target>
+        </trans-unit>
+        <trans-unit id="label_passwd">
+            <source>label_passwd</source>
+            <target>Password </target>
+        </trans-unit>
+        <trans-unit id="label_repeatpasswd">
+            <source>label_repeatpasswd</source>
+            <target>Repeat password </target>
+        </trans-unit>
         </body>
     </file>
 </xliff>

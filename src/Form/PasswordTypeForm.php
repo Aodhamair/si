@@ -34,9 +34,10 @@ class PasswordTypeForm extends AbstractType
             RepeatedType::class,
             [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'hasło'],
-                'second_options' => ['label' => 'powtórz hasło'],
+                'first_options' => ['label' => 'label_passwd'],
+                'second_options' => ['label' => 'label_repeatpasswd'],
                 'required' => true,
+                'empty_data' => '',
                 'attr' => ['max_length' => 64],
             ]);
 
