@@ -106,6 +106,10 @@
             <source>title_post_delete</source>
             <target>Deleting the post</target>
         </trans-unit>
+        <trans-unit id="title_post_details">
+            <source>title_post_details</source>
+            <target>Post details</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>
