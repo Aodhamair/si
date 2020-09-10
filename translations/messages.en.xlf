@@ -74,6 +74,10 @@
             <source>label_delete</source>
             <target>DELETE</target>
         </trans-unit>
+        <trans-unit id="action_delete">
+            <source>action_delete</source>
+            <target>DELETE</target>
+        </trans-unit>
         <trans-unit id="label_edit">
             <source>label_edit</source>
             <target>EDIT</target>
@@ -89,6 +93,18 @@
         <trans-unit id="label_repeatpasswd">
             <source>label_repeatpasswd</source>
             <target>Repeat password </target>
+        </trans-unit>
+        <trans-unit id="label_nick">
+            <source>label_nick</source>
+            <target>Nick </target>
+        </trans-unit>
+         <trans-unit id="title_comment_delete">
+            <source>title_comment_delete</source>
+            <target>Deleting the comment</target>
+        </trans-unit>
+        <trans-unit id="title_post_delete">
+            <source>title_post_delete</source>
+            <target>Deleting the post</target>
         </trans-unit>
         </body>
     </file>

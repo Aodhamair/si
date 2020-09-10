@@ -134,5 +134,26 @@ class PostController extends AbstractController
     }
 
 
+    /**
+     * @Route("/{id}/commentdelete",name="comment_delete", methods={"GET","DELETE"})
+     */
+    public function deleteComment(CommentsRepository $repository, Request $request, Comments $comment)
+    {
+        $form = $this->createForm(FormType::class, $comment, ['method'=>'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository->deleteComment($comment);
+            $this->addFlash('success', 'message_deleted_successfully');
+            return $this->redirectToRoute("posts");
+        }
+
+        return $this->render('post/commentdelete.html.twig', ['form'=>$form->createView(), "comment"=>$comment]);
+    }
+
 
 }

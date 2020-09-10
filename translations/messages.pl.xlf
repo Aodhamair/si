@@ -20,7 +20,7 @@
         </trans-unit>
         <trans-unit id="label_content">
             <source>label_content</source>
-            <target>Zawartość</target>
+            <target>Treść: </target>
         </trans-unit>
         <trans-unit id="label_tags">
             <source>label_tags</source>
@@ -56,11 +56,11 @@
         </trans-unit>
         <trans-unit id="label_email">
             <source>label_email</source>
-            <target>Email </target>
+            <target>Email: </target>
         </trans-unit>
         <trans-unit id="label_passw">
             <source>label_passw</source>
-            <target>Hasło </target>
+            <target>Hasło: </target>
         </trans-unit>
         <trans-unit id="label_created_at">
             <source>label_created_at</source>
@@ -74,6 +74,10 @@
             <source>label_delete</source>
             <target>USUŃ</target>
         </trans-unit>
+        <trans-unit id="action_delete">
+            <source>action_delete</source>
+            <target>USUŃ</target>
+        </trans-unit>
         <trans-unit id="label_edit">
             <source>label_edit</source>
             <target>EDYTUJ</target>
@@ -84,11 +88,23 @@
         </trans-unit>
         <trans-unit id="label_passwd">
             <source>label_passwd</source>
-            <target>Hasło </target>
+            <target>Hasło: </target>
         </trans-unit>
         <trans-unit id="label_repeatpasswd">
             <source>label_repeatpasswd</source>
-            <target>Powtórz hasło </target>
+            <target>Powtórz hasło: </target>
+        </trans-unit>
+        <trans-unit id="label_nick">
+            <source>label_nick</source>
+            <target>Nick: </target>
+        </trans-unit>
+        <trans-unit id="title_comment_delete">
+            <source>title_comment_delete</source>
+            <target>Usuwanie komentarza</target>
+        </trans-unit>
+        <trans-unit id="title_post_delete">
+            <source>title_post_delete</source>
+            <target>Usuwanie posta</target>
         </trans-unit>
         </body>
     </file>
