@@ -110,6 +110,35 @@
             <source>title_post_details</source>
             <target>Post details</target>
         </trans-unit>
+        <trans-unit id="title_password_edit">
+            <source>title_password_edit</source>
+            <target>Edit password</target>
+        </trans-unit>
+
+        <trans-unit id="message_item_not_found">
+            <source>message_item_not_found</source>
+            <target>Sorry, item not found. </target>
+        </trans-unit>
+        <trans-unit id="message_created_successfully">
+            <source>message_created_successfully</source>
+            <target>Good job, created succesfully!</target>
+        </trans-unit>
+        <trans-unit id="message_updated_successfully">
+            <source>message_updated_successfully</source>
+            <target>Great, updated succesfully!</target>
+        </trans-unit>
+        <trans-unit id="message_form_error">
+            <source>message_form_error</source>
+            <target>Sorry, form error</target>
+        </trans-unit>
+        <trans-unit id="message_permission_denied">
+            <source>message_permission_denied</source>
+            <target>No way, bro, permission denied.</target>
+        </trans-unit>
+        <trans-unit id="message_deleted_successfully">
+            <source>message_deleted_successfully</source>
+            <target>Nice, deleted succesfully!</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>
