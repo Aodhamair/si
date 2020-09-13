@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * PostsRepository
+ */
 namespace App\Repository;
 
 use App\Entity\Category;
@@ -14,8 +17,24 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Posts[]    findAll()
  * @method Posts[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
+/**
+ * Class PostsRepository
+ * @package App\Repository
+ */
 class PostsRepository extends ServiceEntityRepository
 {
+
+
+    /**
+     * PostsRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Posts::class);
+    }
+
     /**
      * Items per page.
      *
@@ -27,12 +46,8 @@ class PostsRepository extends ServiceEntityRepository
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;
 
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Posts::class);
-    }
-
     /**
+     * finds and order records by date
      * @return Posts[] Returns an array of Posts objects
      */
     public function findAndOrderByDate()
@@ -44,11 +59,24 @@ class PostsRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * save function
+     * @param Posts $post
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function save(Posts $post): void
     {
         $this->_em->persist($post);
         $this->_em->flush($post);
     }
+
+    /**
+     * delete function
+     * @param Posts $post
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
 
     public function delete(Posts $post): void
     {
@@ -56,6 +84,11 @@ class PostsRepository extends ServiceEntityRepository
         $this->_em->flush($post);
     }
 
+    /**
+     * List of posts
+     * @param Category $categoryId
+     * @return QueryBuilder
+     */
     public function postList(Category $categoryId): QueryBuilder
     {
         $queryBuilder = $this->getOrCreateQueryBuilder()
@@ -70,6 +103,12 @@ class PostsRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
+    /**
+     * Comments under post
+     * @param Posts $post
+     * @return QueryBuilder
+     */
 
     public function PostComments(Posts $post): QueryBuilder
     {

@@ -40,9 +40,9 @@ class PostsService
 
     /**
      * PostsService constructor.
-     *
-     * @param \App\Repository\PostsRepository         $postsRepository Posts repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator       Paginator
+     * @param PostsRepository $postsRepository
+     * @param CommentsRepository $commentsRepository
+     * @param PaginatorInterface $paginator
      */
     public function __construct(PostsRepository $postsRepository, CommentsRepository $commentsRepository, PaginatorInterface $paginator)
     {

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * commentsRepository
+ */
 namespace App\Repository;
 
 use App\Entity\Comments;
@@ -12,18 +15,41 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Comments[]    findAll()
  * @method Comments[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
+/**
+ * Class CommentsRepository
+ * @package App\Repository
+ */
 class CommentsRepository extends ServiceEntityRepository
 {
+
+    /**
+     * CommentsRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comments::class);
     }
 
+    /**
+     * save comments
+     * @param Comments $comment
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function saveComment(Comments $comment): void
     {
         $this->_em->persist($comment);
         $this->_em->flush($comment);
     }
+
+    /**
+     * delete comments
+     * @param Comments $comment
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
 
     public function deleteComment(Comments $comment): void
     {

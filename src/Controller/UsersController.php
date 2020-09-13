@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * User Controller
+ */
 namespace App\Controller;
 
 use App\Form\EmailTypeForm;
@@ -10,6 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class UsersController
+ * @package App\Controller
+ */
 class UsersController extends AbstractController
 {
     /**
@@ -29,8 +36,12 @@ class UsersController extends AbstractController
         $this->userService = $userService;
     }
 
+
     /**
+     * Change password
      * @Route("/changepassword", name="change_password", methods={"GET","PUT"})
+     * @param Request $request
+     * @return Response
      */
     public function changePassword(Request $request): Response
     {
@@ -50,8 +61,14 @@ class UsersController extends AbstractController
         return $this->render('user/password.html.twig', ['user' => $user, 'form' => $form->createView()]);
     }
 
+
     /**
+     * Change mail
      * @Route("/changemail", name="change_email", methods={"GET","PUT"})
+     * @param Request $request
+     * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function changeEmail(Request $request): Response
     {

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * CategoryRepository
+ */
 namespace App\Repository;
 
 use App\Entity\Category;
@@ -12,18 +15,40 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Category[]    findAll()
  * @method Category[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
+/**
+ * Class CategoryRepository
+ * @package App\Repository
+ */
 class CategoryRepository extends ServiceEntityRepository
 {
+    /**
+     * CategoryRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
     }
 
+    /**
+     * save function
+     * @param Category $category
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function save(Category $category): void
     {
         $this->_em->persist($category);
         $this->_em->flush($category);
     }
+
+    /**
+     * delete function
+     * @param Category $category
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
 
     public function delete(Category $category): void
     {

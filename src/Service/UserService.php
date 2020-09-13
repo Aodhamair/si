@@ -1,6 +1,6 @@
 <?php
 /**
- * Userservice.
+ * UserService.
  */
 
 namespace App\Service;
@@ -22,14 +22,15 @@ class UserService
     private $userRepository;
 
     /**
+     * password encoder
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
 
     /**
-     * Account constructor.
-     *
-     * @param \Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface $passwordEncoder Password encoder
+     * UserService constructor.
+     * @param UserRepository $userRepository
+     * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -38,20 +39,23 @@ class UserService
     }
 
     /**
-     * Change password.
-     *
+     * save.
+     * @param User $user
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
+
     public function save(User $user): void
     {
         $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
         $this->userRepository->save($user);
     }
 
+
     /**
-     * Change email.
+     * save mail
      *
+     * @param User $user
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
