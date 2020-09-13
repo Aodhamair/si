@@ -54,6 +54,7 @@ class User implements UserInterface
      *     nullable=false,
      *     options={"unsigned"=true},
      * )
+     *
      */
     private $id;
 
@@ -67,7 +68,7 @@ class User implements UserInterface
      *     length=180,
      *     unique=true,
      * )
-     *
+     * @Assert\Type(type="string")
      * @Assert\NotBlank
      * @Assert\Email
      */

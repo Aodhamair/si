@@ -106,13 +106,13 @@
             <source>title_post_delete</source>
             <target>Usuwanie posta</target>
         </trans-unit>
-        <trans-unit id="title_post_details">
-            <source>title_post_details</source>
-            <target>Szczegóły posta </target>
-        </trans-unit>
-        <trans-unit id="title_password_edit">
+           <trans-unit id="title_password_edit">
             <source>title_password_edit</source>
             <target>Zmień hasło</target>
+        </trans-unit>
+        <trans-unit id="title_post_details">
+            <source>title_post_details</source>
+            <target>Szczegóły posta</target>
         </trans-unit>
 
 

@@ -106,10 +106,6 @@
             <source>title_post_delete</source>
             <target>Deleting the post</target>
         </trans-unit>
-        <trans-unit id="title_post_details">
-            <source>title_post_details</source>
-            <target>Post details</target>
-        </trans-unit>
         <trans-unit id="title_password_edit">
             <source>title_password_edit</source>
             <target>Edit password</target>
@@ -138,6 +134,10 @@
         <trans-unit id="message_deleted_successfully">
             <source>message_deleted_successfully</source>
             <target>Nice, deleted succesfully!</target>
+        </trans-unit>
+        <trans-unit id="title_post_details">
+            <source>title_post_details</source>
+            <target>Post details</target>
         </trans-unit>
         </body>
     </file>
