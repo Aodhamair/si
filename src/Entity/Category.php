@@ -20,6 +20,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\Type(type="string")
      * @Assert\Length(
      *     min="1",
@@ -28,16 +29,32 @@ class Category
      */
     private $name;
 
+    /**
+     * getter for Id
+     *
+     *
+     * @return int|null
+     *
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * getter for Name
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * setter for Name
+     * @param string $name
+     * @return Category
+     */
     public function setName(string $name): self
     {
         $this->name = $name;

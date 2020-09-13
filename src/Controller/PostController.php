@@ -52,11 +52,14 @@ class PostController extends AbstractController
         $page = $request->query->getInt('page', 1);
         $pagination = $this->postsService->createPaginatedList($page);
 
-        return $this->render('post/index.html.twig',
-            ['pagination' => $pagination]);
+        return $this->render(
+            'post/index.html.twig',
+            ['pagination' => $pagination]
+        );
     }
 
     /**
+     * New Post
      * @Route("/new",name="post_new")
      */
     public function new(Request $request, PostsRepository $repository)

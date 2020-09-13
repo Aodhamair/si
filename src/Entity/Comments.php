@@ -20,6 +20,7 @@ class Comments
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\Type(type="string")
      * @Assert\Length(
      *     min="1",
@@ -32,6 +33,7 @@ class Comments
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\Type(type="string")
      * @Assert\Length(
      *     min="1",
@@ -42,6 +44,7 @@ class Comments
 
     /**
      * @ORM\Column(type="string", length=500)
+     *
      * @Assert\Type(type="string")
      * @Assert\Length(
      *     min="1",
@@ -56,15 +59,29 @@ class Comments
      */
     private $post;
 
+    /**
+     * getter for Id.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * getter for email
+     * @return string|null
+     */
+
     public function getEmail(): ?string
     {
         return $this->email;
     }
+
+    /**
+     * setter for email
+     * @param string $email
+     * @return Comments
+     */
 
     public function setEmail(string $email): self
     {
@@ -73,10 +90,21 @@ class Comments
         return $this;
     }
 
+    /**
+     * getter for Nick
+     * @return string|null
+     */
+
     public function getNick(): ?string
     {
         return $this->nick;
     }
+
+    /**
+     * setter for nick
+     * @param string $nick
+     * @return Comments
+     */
 
     public function setNick(string $nick): self
     {
@@ -85,11 +113,21 @@ class Comments
         return $this;
     }
 
+    /**
+     * getter for content
+     * @return string|null
+     */
+
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * setter for content
+     * @param string $content
+     * @return Comments
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -97,10 +135,21 @@ class Comments
         return $this;
     }
 
+    /**
+     * getter for post
+     * @return Posts|null
+     */
+
     public function getPost(): ?Posts
     {
         return $this->post;
     }
+
+    /**
+     * setter for post
+     * @param Posts|null $post
+     * @return Comments
+     */
 
     public function setPost(?Posts $post): self
     {

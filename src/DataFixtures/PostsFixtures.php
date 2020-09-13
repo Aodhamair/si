@@ -34,6 +34,9 @@ class PostsFixtures extends AbstractBaseFixtures implements DependentFixtureInte
         $manager->flush();
     }
 
+    /**
+     * Get dependencies.
+     **/
     public function getDependencies()
     {
         return [CategoryFixtures::class];

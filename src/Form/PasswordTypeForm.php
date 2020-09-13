@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * PasswordTypeForm
+ */
 namespace App\Form;
 
 use App\Entity\User;
@@ -9,9 +12,15 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class PasswordTypeForm
+ * @package App\Form
+ */
 class PasswordTypeForm extends AbstractType
 {
     /**
+     *
+     *
      * Builds the form.
      *
      * This method is called for each type in the hierarchy starting from the
@@ -26,16 +35,17 @@ class PasswordTypeForm extends AbstractType
     {
         $builder
             ->add(
-            'password',
-            RepeatedType::class,
-            [
+                'password',
+                RepeatedType::class,
+                [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'label_passwd'],
                 'second_options' => ['label' => 'label_repeatpasswd'],
                 'required' => true,
                 'empty_data' => '',
                 'attr' => ['max_length' => 64],
-            ]);
+                ]
+            );
 
 //        -> add('save', SubmitType::class, ['label'=>'Zapisz']);
     }

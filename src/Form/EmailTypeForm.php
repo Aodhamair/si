@@ -1,11 +1,18 @@
 <?php
 
+/**
+ * EmailTypeForm
+ */
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * Class EmailTypeForm
+ * @package App\Form
+ */
 class EmailTypeForm extends AbstractType
 {
     /**
@@ -29,8 +36,7 @@ class EmailTypeForm extends AbstractType
                     'label' => 'label_email',
                     'required' => true,
                     'empty_data' => '',
-                ]);
-
-
+                ]
+            );
     }
 }

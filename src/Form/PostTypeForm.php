@@ -1,7 +1,8 @@
 <?php
 /**
- * PostTypeForm
+ * PostTypeForm.
  */
+
 namespace App\Form;
 
 use App\Entity\Category;
@@ -12,8 +13,16 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class PostTypeForm
+ * @package App\Form
+ */
 class PostTypeForm extends AbstractType
 {
+    /**Build form function
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -34,6 +43,10 @@ class PostTypeForm extends AbstractType
             ->add('save', SubmitType::class, ['label' => 'Zapisz']);
     }
 
+    /**
+     * Configure options
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

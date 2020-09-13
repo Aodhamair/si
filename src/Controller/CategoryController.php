@@ -5,10 +5,8 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryTypeForm;
 use App\Repository\CategoryRepository;
-use App\Repository\PostsRepository;
 use App\Service\CategoryService;
 use App\Service\PostsService;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +54,7 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * Adding new category
      * @Route("/new",name="category_new")
      */
     public function new(Request $request)
@@ -100,7 +99,9 @@ class CategoryController extends AbstractController
         $page = $request->query->getInt('page', 1);
         $pagination = $this->postsService->createPaginatedList($page);
 
-        return $this->render('category/post_category.html.twig',
-            ['pagination' => $pagination]);
+        return $this->render(
+            'category/post_category.html.twig',
+            ['pagination' => $pagination]
+        );
     }
 }
