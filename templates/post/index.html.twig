@@ -11,7 +11,7 @@
        <h1>  <a href="{{ url('post_show', {id: post.id}) }}" title="{{ post.title }}">
              {{ post.title }}</a></h1>
         <p>{{ post.content }}</p>
-        <p>{{ 'label_created_at'|trans }}{{ post.createdAt|date('d-m-Y')}}
+        <p>{{ 'label_created_at'|trans }} {{ post.createdAt|format_date('long') }}
 
             {% if is_granted('ROLE_ADMIN') %}
               +++ <a href="{{ url('post_edit',{id:post.id}) }}">{{ 'label_edit'|trans }}</a> +++

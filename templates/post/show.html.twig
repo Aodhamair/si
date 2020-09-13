@@ -8,7 +8,7 @@
     <h1>{{  post.title }}</h1>
     {% if post is defined and post|length %}
         <dl class="dl-horizontal">
-            {{ 'label_created_at'|trans }} {{ post.createdAt|date('d/m/Y') }}
+            {{ 'label_created_at'|trans }} {{ post.createdAt|format_date('long') }}
 
             <dd>{{  post.content }}</dd>
         </dl>

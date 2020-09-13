@@ -10,7 +10,7 @@
         {% for post in pagination.items %}
             <h1>{{ post.title }}</h1>
             <p>{{ post.content }}</p>
-            <p>{{ post.createdAt|date('d-m-Y')}} +++ <a href="{{ url('post_edit',{id:post.id}) }}">{{ 'label_edit'|trans }}</a> +++ <a href="{{ url('post_delete',{id:post.id}) }}">{{ 'label_delete'|trans }}</a> </p>
+            <p>{{ post.createdAt|format_date('long') }} +++ <a href="{{ url('post_edit',{id:post.id}) }}">{{ 'label_edit'|trans }}</a> +++ <a href="{{ url('post_delete',{id:post.id}) }}">{{ 'label_delete'|trans }}</a> </p>
         {% endfor %}
 
 
