@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * PostTypeForm
+ */
 namespace App\Form;
 
 use App\Entity\Category;
