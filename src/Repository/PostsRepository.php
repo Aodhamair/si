@@ -40,6 +40,8 @@ class PostsRepository extends ServiceEntityRepository
       * @return Posts[] Returns an array of Posts objects
       */
 
+
+
     public function findAndOrderByDate()
     {
         return $this->createQueryBuilder('p')
@@ -71,11 +73,16 @@ class PostsRepository extends ServiceEntityRepository
 //            ->getQuery()
 //            ->getResult()
 //            ;
-        $queryBuilder = $this->createQueryBuilder('p')
+        $queryBuilder = $this->getOrCreateQueryBuilder()
 
 //            ->join('c.Id','posts','with','Posts.category= :categoryId')
-            ->join('App\Entity\Category','c')
-            ->andWhere('p.category=:categoryId')
+ //           ->join('App\Entity\Category','c')
+            ->select(
+                'partial posts.{id, title, content, createdAt}',
+                'partial category.{id}'
+            )
+            ->join('posts.category','category')
+            ->andWhere('posts.category=:categoryId')
             ->setParameter('categoryId', $categoryId);
 
         return $queryBuilder;
@@ -84,9 +91,13 @@ class PostsRepository extends ServiceEntityRepository
 
     public function PostComments(Posts $post) : QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('p')
-        ->join('App\Entity\Comments','com')
-        ->andWhere('p.comments=:post')
+        $queryBuilder = $this->getOrCreateQueryBuilder()
+            ->select(
+                'partial posts.{id, title, content, createdAt}',
+                'partial comments.{id, nick, email, content}'
+            )
+        ->join('posts.comments','comments')
+        ->andWhere('posts.comments=:post')
         ->setParameter('post', $post);
 
         return $queryBuilder;
@@ -103,6 +114,18 @@ class PostsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('posts');
+    }
 
 
 }

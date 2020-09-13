@@ -57,11 +57,13 @@ class Posts
     /**
      * @ORM\ManyToOne(targetEntity=Category::class)
      * @ORM\JoinColumn(nullable=true)
+     *
      */
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="post", orphanRemoval=true, fetch="EXTRA_LAZY")
+     *
      */
     private $comments;
 

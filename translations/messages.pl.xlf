@@ -115,7 +115,6 @@
             <target>Szczegóły posta</target>
         </trans-unit>
 
-
         <trans-unit id="message_item_not_found">
             <source>message_item_not_found</source>
             <target>Nic tu nie ma.</target>
