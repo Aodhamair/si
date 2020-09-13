@@ -8,7 +8,6 @@ use App\Form\CommentTypeForm;
 use App\Form\PostTypeForm;
 use App\Repository\PostsRepository;
 use App\Service\PostsService;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +47,7 @@ class PostController extends AbstractController
      *
      * @Route("/",name="posts")
      */
-    public function index(PostsRepository $repository, Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
         $pagination = $this->postsService->createPaginatedList($page);
@@ -62,9 +61,9 @@ class PostController extends AbstractController
      */
     public function new(Request $request, PostsRepository $repository)
     {
-        $post = new Posts(); /*obiekt*/
-        $form = $this->createForm(PostTypeForm::class, $post); /*stworzyliśmy zmienną formularza na podstawie PostTypeForm i wkazałyśmy jej obiekt*/
-        $form->handleRequest($request); /*przechwycimy request, eby wsadzić go do obiektu*/
+        $post = new Posts();
+        $form = $this->createForm(PostTypeForm::class, $post);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repository->save($post);
@@ -73,7 +72,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('posts');
         }
 
-        return $this->render('post/form.html.twig', ['form' => $form->createView()]); /*wygenerowanie widoku i prekazanie widoku formularza, który się sam robi, bo symfony jest mondre.*/
+        return $this->render('post/form.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -85,10 +84,10 @@ class PostController extends AbstractController
     public function show(Posts $post, PostsRepository $postRepository, Request $request): Response
     {
         $comments = $postRepository->PostComments($post);
-        $comment = new Comments(); /*obiekt*/
+        $comment = new Comments();
         $comment->setPost($post);
         $form = $this->createForm(CommentTypeForm::class, $comment);
-        $form->handleRequest($request); /*przechwycimy request, eby wsadzić go do obiektu*/
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->postsService->saveComment($comment);

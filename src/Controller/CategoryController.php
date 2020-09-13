@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Entity\Posts;
 use App\Form\CategoryTypeForm;
 use App\Repository\CategoryRepository;
 use App\Repository\PostsRepository;
@@ -61,9 +60,9 @@ class CategoryController extends AbstractController
      */
     public function new(Request $request)
     {
-        $category = new Category(); /*obiekt*/
-        $form = $this->createForm(CategoryTypeForm::class, $category); /*stworzyliśmy zmienną formularza na podstawie CtegoryTypeForm i wkazałyśmy jej obiekt*/
-        $form->handleRequest($request); /*przechwycimy request, żeby wsadzić go do obiektu*/
+        $category = new Category();
+        $form = $this->createForm(CategoryTypeForm::class, $category);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->categoryService->save($category);
@@ -72,7 +71,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category');
         }
 
-        return $this->render('category/form.html.twig', ['form' => $form->createView()]); /*wygenerowanie widoku i prekazanie widoku formularza, który się sam robi, bo symfony jest mondre.*/
+        return $this->render('category/form.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -96,7 +95,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/{id}",name="category_posts", methods={"GET"}, requirements={"id":"[1-9]\d*"})
      */
-    public function showPosts(Category $category, PostsRepository $repository, Request $request, PaginatorInterface $paginator): Response
+    public function showPosts(Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
         $pagination = $this->postsService->createPaginatedList($page);
