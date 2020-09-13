@@ -4,10 +4,9 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostsRepository")
@@ -50,20 +49,17 @@ class Posts
      * @Assert\Type(type="\DateTimeInterface")
      *
      * @Gedmo\Timestampable(on="create")
-     *
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class)
      * @ORM\JoinColumn(nullable=true)
-     *
      */
     private $category;
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="post", orphanRemoval=true, fetch="EXTRA_LAZY")
-     *
      */
     private $comments;
 
@@ -71,7 +67,6 @@ class Posts
     {
         $this->comments = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {

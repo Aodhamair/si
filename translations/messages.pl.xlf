@@ -139,8 +139,10 @@
             <source>message_deleted_successfully</source>
             <target>Usunięto pomyślnie.</target>
         </trans-unit>
-
-
+        <trans-unit id="title_email_edit">
+            <source>title_email_edit</source>
+            <target>Zmiana adresu e-mail</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>

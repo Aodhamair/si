@@ -21,13 +21,12 @@ class PostsFixtures extends AbstractBaseFixtures implements DependentFixtureInte
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(15,'posts',function ($i) {
+        $this->createMany(15, 'posts', function ($i) {
             $post = new Posts();
             $post->setTitle($this->faker->sentence);
             $post->setContent($this->faker->sentence);
             $post->setCategory($this->getRandomReference('category'));
             $post->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-
 
             return $post;
         });

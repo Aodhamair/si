@@ -2,11 +2,10 @@
 
 namespace App\Repository;
 
-use App\Entity\Posts;
 use App\Entity\Category;
-use App\Entity\Comments;
-use Doctrine\ORM\QueryBuilder;
+use App\Entity\Posts;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,7 +16,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostsRepository extends ServiceEntityRepository
 {
-
     /**
      * Items per page.
      *
@@ -29,19 +27,14 @@ class PostsRepository extends ServiceEntityRepository
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;
 
-
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Posts::class);
     }
 
     /**
-      * @return Posts[] Returns an array of Posts objects
-      */
-
-
-
+     * @return Posts[] Returns an array of Posts objects
+     */
     public function findAndOrderByDate()
     {
         return $this->createQueryBuilder('p')
@@ -63,57 +56,34 @@ class PostsRepository extends ServiceEntityRepository
         $this->_em->flush($post);
     }
 
-
-    public function postList(Category $categoryId) : QueryBuilder
+    public function postList(Category $categoryId): QueryBuilder
     {
-//        return $post->createQueryBuilder('c')
-//
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $categoryId)
-//            ->getQuery()
-//            ->getResult()
-//            ;
         $queryBuilder = $this->getOrCreateQueryBuilder()
 
-//            ->join('c.Id','posts','with','Posts.category= :categoryId')
- //           ->join('App\Entity\Category','c')
             ->select(
                 'partial posts.{id, title, content, createdAt}',
                 'partial category.{id}'
             )
-            ->join('posts.category','category')
+            ->join('posts.category', 'category')
             ->andWhere('posts.category=:categoryId')
             ->setParameter('categoryId', $categoryId);
 
         return $queryBuilder;
-
     }
 
-    public function PostComments(Posts $post) : QueryBuilder
+    public function PostComments(Posts $post): QueryBuilder
     {
         $queryBuilder = $this->getOrCreateQueryBuilder()
             ->select(
                 'partial posts.{id, title, content, createdAt}',
                 'partial comments.{id, nick, email, content}'
             )
-        ->join('posts.comments','comments')
+        ->join('posts.comments', 'comments')
         ->andWhere('posts.comments=:post')
         ->setParameter('post', $post);
 
         return $queryBuilder;
-}
-
-    /*
-    public function findOneBySomeField($value): ?Posts
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
     }
-    */
 
     /**
      * Get or create new query builder.
@@ -126,6 +96,4 @@ class PostsRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('posts');
     }
-
-
 }

@@ -1,22 +1,19 @@
 <?php
 
-
 namespace App\Controller;
 
-use App\Entity\Posts;
 use App\Entity\Comments;
+use App\Entity\Posts;
+use App\Form\CommentTypeForm;
 use App\Form\PostTypeForm;
 use App\Repository\PostsRepository;
-use App\Repository\CommentsRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
+use App\Service\PostsService;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Form\CommentTypeForm;
-
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/posts")
@@ -24,12 +21,28 @@ use App\Form\CommentTypeForm;
 class PostController extends AbstractController
 {
     /**
+     * Posts service.
      *
+     * @var \App\Service\PostsService
+     */
+    private $postsService;
+
+    /**
+     * PostController constructor.
+     *
+     * @param \App\Service\PostsService $postsService Posts service
+     */
+    public function __construct(PostsService $postsService)
+    {
+        $this->postsService = $postsService;
+    }
+
+    /**
      *  * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
      * @param \App\Repository\PostRepository            $repository PostRepository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator      Paginator
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator  Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -37,15 +50,12 @@ class PostController extends AbstractController
      */
     public function index(PostsRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
-        $pagination = $paginator->paginate(
-             $repository->findAndOrderByDate(),
-             $request->query->getInt('page', 1),
-             PostsRepository::PAGINATOR_ITEMS_PER_PAGE,
-    );
+        $page = $request->query->getInt('page', 1);
+        $pagination = $this->postsService->createPaginatedList($page);
+
         return $this->render('post/index.html.twig',
             ['pagination' => $pagination]);
     }
-
 
     /**
      * @Route("/new",name="post_new")
@@ -59,10 +69,11 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $repository->save($post);
             $this->addFlash('success', 'message_created_successfully');
-            return $this->redirectToRoute("posts");
+
+            return $this->redirectToRoute('posts');
         }
 
-        return $this->render('post/form.html.twig', ['form'=>$form->createView()]); /*wygenerowanie widoku i prekazanie widoku formularza, który się sam robi, bo symfony jest mondre.*/
+        return $this->render('post/form.html.twig', ['form' => $form->createView()]); /*wygenerowanie widoku i prekazanie widoku formularza, który się sam robi, bo symfony jest mondre.*/
     }
 
     /**
@@ -71,9 +82,8 @@ class PostController extends AbstractController
      *     methods={"GET","POST"},
      *     requirements={"id": "[1-9]\d*"})
      */
-    public function show(Posts $post, PostsRepository $postRepository, Request $request, CommentsRepository $commentRepository): Response
+    public function show(Posts $post, PostsRepository $postRepository, Request $request): Response
     {
-
         $comments = $postRepository->PostComments($post);
         $comment = new Comments(); /*obiekt*/
         $comment->setPost($post);
@@ -81,26 +91,26 @@ class PostController extends AbstractController
         $form->handleRequest($request); /*przechwycimy request, eby wsadzić go do obiektu*/
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $commentRepository->saveComment($comment);
+            $this->postsService->saveComment($comment);
             $this->addFlash('success', 'message_created_successfully');
-            return $this->redirectToRoute("posts");
+
+            return $this->redirectToRoute('posts');
         }
 
         return $this->render(
             'post/show.html.twig',
             ['post' => $post,
             'comments' => $comments,
-            'form'=>$form->createView()]
+            'form' => $form->createView(), ]
         );
     }
 
     /**
      * @Route("/{id}/delete",name="post_delete", methods={"GET","DELETE"})
      */
-    public function delete(PostsRepository $repository, Request $request, Posts $post)
+    public function delete(Request $request, Posts $post)
     {
-        $form = $this->createForm(FormType::class, $post, ['method'=>'DELETE']);
+        $form = $this->createForm(FormType::class, $post, ['method' => 'DELETE']);
         $form->handleRequest($request);
 
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
@@ -108,38 +118,39 @@ class PostController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $repository->delete($post);
+            $this->postsService->delete($post);
             $this->addFlash('success', 'message_deleted_successfully');
-            return $this->redirectToRoute("posts");
+
+            return $this->redirectToRoute('posts');
         }
 
-        return $this->render('post/delete.html.twig', ['form'=>$form->createView(), "post"=>$post]);
+        return $this->render('post/delete.html.twig', ['form' => $form->createView(), 'post' => $post]);
     }
 
     /**
      * @Route("/{id}/edit",name="post_edit", methods={"GET","PUT"})
      */
-    public function edit(PostsRepository $repository, Request $request, Posts $post)
+    public function edit(Request $request, Posts $post)
     {
-        $form = $this->createForm(PostTypeForm::class, $post, ['method'=>'PUT']);
+        $form = $this->createForm(PostTypeForm::class, $post, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $repository->save($post);
+            $this->postsService->save($post);
             $this->addFlash('success', 'message_edited_successfully');
-            return $this->redirectToRoute("posts");
+
+            return $this->redirectToRoute('posts');
         }
 
-        return $this->render('post/form.html.twig', ['form'=>$form->createView()]);
+        return $this->render('post/form.html.twig', ['form' => $form->createView()]);
     }
-
 
     /**
      * @Route("/{id}/commentdelete",name="comment_delete", methods={"GET","DELETE"})
      */
-    public function deleteComment(CommentsRepository $repository, Request $request, Comments $comment)
+    public function deleteComment(Request $request, Comments $comment)
     {
-        $form = $this->createForm(FormType::class, $comment, ['method'=>'DELETE']);
+        $form = $this->createForm(FormType::class, $comment, ['method' => 'DELETE']);
         $form->handleRequest($request);
 
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
@@ -147,13 +158,12 @@ class PostController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $repository->deleteComment($comment);
+            $this->postsService->deleteComment($comment);
             $this->addFlash('success', 'message_deleted_successfully');
-            return $this->redirectToRoute("posts");
+
+            return $this->redirectToRoute('posts');
         }
 
-        return $this->render('post/commentdelete.html.twig', ['form'=>$form->createView(), "comment"=>$comment]);
+        return $this->render('post/commentdelete.html.twig', ['form' => $form->createView(), 'comment' => $comment]);
     }
-
-
 }

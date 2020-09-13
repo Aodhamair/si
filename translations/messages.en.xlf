@@ -139,6 +139,10 @@
             <source>title_post_details</source>
             <target>Post details</target>
         </trans-unit>
+        <trans-unit id="title_email_edit">
+            <source>title_email_edit</source>
+            <target>Change your e-mail</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>

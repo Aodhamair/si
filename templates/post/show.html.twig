@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title_post_details' }}
+    {{ 'title_post_details'|trans }}
 {% endblock %}
 
 {% block body %}
@@ -30,9 +30,9 @@
     <h4>{{ 'label_comments'|trans }}</h4>
     {% for comment in post.comments %}
 <div style="border: dotted; border-color: #000000; width: 600px;">
-        <p style="padding: 3px 0px 0px 5px;"><b>{{ 'label_nick'|trans }}{{ comment.nick }}</b></p>
-        <p style="padding: 3px 0px 0px 5px;"><i>{{ 'label_email'|trans }}{{ comment.email }}</i></p>
-        <p style="padding: 30px 30px 30px 30px;">{{ 'label_content'|trans }}{{ comment.content }}</p>
+        <p style="padding: 3px 0px 0px 5px;"><b>{{ 'label_nick'|trans }} {{ comment.nick }}</b></p>
+        <p style="padding: 3px 0px 0px 5px;"><i>{{ 'label_email'|trans }} {{ comment.email }}</i></p>
+        <p style="padding: 30px 30px 30px 30px;">{{ 'label_content'|trans }} {{ comment.content }}</p>
     {% if is_granted('ROLE_ADMIN') %}
         <p><a href="{{ url('comment_delete',{id:comment.id}) }}">{{ 'label_delete'|trans }}</a> </p>
     {% endif %}
