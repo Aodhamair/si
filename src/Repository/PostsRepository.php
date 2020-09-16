@@ -20,7 +20,6 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class PostsRepository
- * @package App\Repository
  */
 class PostsRepository extends ServiceEntityRepository
 {
@@ -62,6 +61,7 @@ class PostsRepository extends ServiceEntityRepository
     /**
      * save function
      * @param Posts $post
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -74,10 +74,10 @@ class PostsRepository extends ServiceEntityRepository
     /**
      * delete function
      * @param Posts $post
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-
     public function delete(Posts $post): void
     {
         $this->_em->remove($post);
@@ -87,6 +87,7 @@ class PostsRepository extends ServiceEntityRepository
     /**
      * List of posts
      * @param Category $categoryId
+     *
      * @return QueryBuilder
      */
     public function postList(Category $categoryId): QueryBuilder
@@ -107,9 +108,9 @@ class PostsRepository extends ServiceEntityRepository
     /**
      * Comments under post
      * @param Posts $post
+     *
      * @return QueryBuilder
      */
-
     public function PostComments(Posts $post): QueryBuilder
     {
         $queryBuilder = $this->getOrCreateQueryBuilder()

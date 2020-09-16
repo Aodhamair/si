@@ -21,7 +21,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserRepository
- * @package App\Repository
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
@@ -38,7 +37,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * /**
      * Used to upgrade (rehash) the user's password automatically over time.
      * @param UserInterface $user
-     * @param string $newEncodedPassword
+     * @param string        $newEncodedPassword
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -56,6 +56,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * save funtion
      * @param User $user
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

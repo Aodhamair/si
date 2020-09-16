@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class UsersController
- * @package App\Controller
  */
 class UsersController extends AbstractController
 {
@@ -40,7 +39,9 @@ class UsersController extends AbstractController
     /**
      * Change password
      * @Route("/changepassword", name="change_password", methods={"GET","PUT"})
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function changePassword(Request $request): Response
@@ -65,8 +66,11 @@ class UsersController extends AbstractController
     /**
      * Change mail
      * @Route("/changemail", name="change_email", methods={"GET","PUT"})
+     *
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

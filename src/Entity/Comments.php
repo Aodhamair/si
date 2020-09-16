@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Comments entity.
+ * This file is part of the Symfony package.
+ *
+ * (c)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Entity;
 
 use App\Repository\CommentsRepository;
@@ -61,6 +71,7 @@ class Comments
 
     /**
      * getter for Id.
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -71,7 +82,6 @@ class Comments
      * getter for email
      * @return string|null
      */
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -80,9 +90,9 @@ class Comments
     /**
      * setter for email
      * @param string $email
+     *
      * @return Comments
      */
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -94,7 +104,6 @@ class Comments
      * getter for Nick
      * @return string|null
      */
-
     public function getNick(): ?string
     {
         return $this->nick;
@@ -103,9 +112,9 @@ class Comments
     /**
      * setter for nick
      * @param string $nick
+     *
      * @return Comments
      */
-
     public function setNick(string $nick): self
     {
         $this->nick = $nick;
@@ -117,7 +126,6 @@ class Comments
      * getter for content
      * @return string|null
      */
-
     public function getContent(): ?string
     {
         return $this->content;
@@ -126,6 +134,7 @@ class Comments
     /**
      * setter for content
      * @param string $content
+     *
      * @return Comments
      */
     public function setContent(string $content): self
@@ -139,7 +148,6 @@ class Comments
      * getter for post
      * @return Posts|null
      */
-
     public function getPost(): ?Posts
     {
         return $this->post;
@@ -148,9 +156,9 @@ class Comments
     /**
      * setter for post
      * @param Posts|null $post
+     *
      * @return Comments
      */
-
     public function setPost(?Posts $post): self
     {
         $this->post = $post;

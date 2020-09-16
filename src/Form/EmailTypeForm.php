@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class EmailTypeForm
- * @package App\Form
  */
 class EmailTypeForm extends AbstractType
 {

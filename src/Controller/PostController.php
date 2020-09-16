@@ -61,6 +61,14 @@ class PostController extends AbstractController
     /**
      * New Post
      * @Route("/new",name="post_new")
+     *
+     * @param Request         $request
+     * @param PostsRepository $repository
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function new(Request $request, PostsRepository $repository)
     {
@@ -83,6 +91,14 @@ class PostController extends AbstractController
      *     name="post_show",
      *     methods={"GET","POST"},
      *     requirements={"id": "[1-9]\d*"})
+     * @param Posts           $post
+     * @param PostsRepository $postRepository
+     * @param Request         $request
+     *
+     * @return Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function show(Posts $post, PostsRepository $postRepository, Request $request): Response
     {
@@ -108,7 +124,16 @@ class PostController extends AbstractController
     }
 
     /**
+     * Delete function
      * @Route("/{id}/delete",name="post_delete", methods={"GET","DELETE"})
+     *
+     * @param Request $request
+     * @param Posts   $post
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function delete(Request $request, Posts $post)
     {
@@ -130,7 +155,16 @@ class PostController extends AbstractController
     }
 
     /**
+     * Edit function
      * @Route("/{id}/edit",name="post_edit", methods={"GET","PUT"})
+     *
+     * @param Request $request
+     * @param Posts   $post
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function edit(Request $request, Posts $post)
     {
@@ -148,7 +182,16 @@ class PostController extends AbstractController
     }
 
     /**
+     * Delete comment function
      * @Route("/{id}/commentdelete",name="comment_delete", methods={"GET","DELETE"})
+     *
+     * @param Request  $request
+     * @param Comments $comment
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function deleteComment(Request $request, Comments $comment)
     {

@@ -15,13 +15,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class PostTypeForm
- * @package App\Form
  */
 class PostTypeForm extends AbstractType
 {
     /**Build form function
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

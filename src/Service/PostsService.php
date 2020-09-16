@@ -40,7 +40,7 @@ class PostsService
 
     /**
      * PostsService constructor.
-     * @param PostsRepository $postsRepository
+     * @param PostsRepository    $postsRepository
      * @param CommentsRepository $commentsRepository
      * @param PaginatorInterface $paginator
      */

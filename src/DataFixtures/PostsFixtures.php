@@ -35,8 +35,10 @@ class PostsFixtures extends AbstractBaseFixtures implements DependentFixtureInte
     }
 
     /**
-     * Get dependencies.
-     **/
+     *Get dependencies.
+     *
+     * @return array
+     */
     public function getDependencies()
     {
         return [CategoryFixtures::class];

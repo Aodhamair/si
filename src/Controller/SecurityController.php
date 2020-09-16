@@ -12,14 +12,15 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class SecurityController
- * @package App\Controller
  */
 class SecurityController extends AbstractController
 {
     /**
      * Login
      * @Route("/login", name="app_login")
+     *
      * @param AuthenticationUtils $authenticationUtils
+     *
      * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response

@@ -18,7 +18,6 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class CommentsRepository
- * @package App\Repository
  */
 class CommentsRepository extends ServiceEntityRepository
 {
@@ -35,6 +34,7 @@ class CommentsRepository extends ServiceEntityRepository
     /**
      * save comments
      * @param Comments $comment
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -47,10 +47,10 @@ class CommentsRepository extends ServiceEntityRepository
     /**
      * delete comments
      * @param Comments $comment
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-
     public function deleteComment(Comments $comment): void
     {
         $this->_em->remove($comment);

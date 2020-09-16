@@ -29,7 +29,7 @@ class UserService
 
     /**
      * UserService constructor.
-     * @param UserRepository $userRepository
+     * @param UserRepository               $userRepository
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder)
@@ -41,10 +41,11 @@ class UserService
     /**
      * save.
      * @param User $user
+     *
      * @throws \Doctrine\ORM\ORMException
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-
     public function save(User $user): void
     {
         $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
@@ -56,6 +57,7 @@ class UserService
      * save mail
      *
      * @param User $user
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

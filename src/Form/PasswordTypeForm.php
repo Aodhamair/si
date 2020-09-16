@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class PasswordTypeForm
- * @package App\Form
  */
 class PasswordTypeForm extends AbstractType
 {

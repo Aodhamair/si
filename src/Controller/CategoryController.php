@@ -44,7 +44,12 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * Adding new category
      * @Route("/",name="category")
+     *
+     * @param CategoryRepository $repository
+     *
+     * @return Response
      */
     public function index(CategoryRepository $repository)
     {
@@ -56,6 +61,13 @@ class CategoryController extends AbstractController
     /**
      * Adding new category
      * @Route("/new",name="category_new")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function new(Request $request)
     {
@@ -73,8 +85,18 @@ class CategoryController extends AbstractController
         return $this->render('category/form.html.twig', ['form' => $form->createView()]);
     }
 
+
     /**
+     * Edit category
      * @Route("/{id}/edit",name="category_edit", methods={"GET","PUT"})
+     *
+     * @param Request  $request
+     * @param Category $category
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function edit(Request $request, Category $category)
     {
@@ -92,7 +114,12 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * Show posts in category
      * @Route("/{id}",name="category_posts", methods={"GET"}, requirements={"id":"[1-9]\d*"})
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function showPosts(Request $request): Response
     {

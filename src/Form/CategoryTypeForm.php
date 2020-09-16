@@ -13,14 +13,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class CategoryTypeForm
- * @package App\Form
  */
 class CategoryTypeForm extends AbstractType
 {
     /**
      * builds the form
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

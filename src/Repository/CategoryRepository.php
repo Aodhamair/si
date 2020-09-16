@@ -18,7 +18,6 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class CategoryRepository
- * @package App\Repository
  */
 class CategoryRepository extends ServiceEntityRepository
 {
@@ -34,6 +33,7 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * save function
      * @param Category $category
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -46,10 +46,10 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * delete function
      * @param Category $category
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-
     public function delete(Category $category): void
     {
         $this->_em->remove($category);

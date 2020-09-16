@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Post entity.
+ * This file is part of the Symfony package.
+ *
+ * (c)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -71,6 +81,9 @@ class Posts
      */
     private $comments;
 
+    /**
+     * Posts constructor.
+     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -98,6 +111,7 @@ class Posts
     /**
      * setter for title
      * @param string $title
+     *
      * @return Posts
      */
     public function setTitle(string $title): self
@@ -118,7 +132,9 @@ class Posts
 
     /**
      * setter for content
+     *
      * @param string $content
+     *
      * @return Posts
      */
     public function setContent(string $content): self
@@ -141,6 +157,7 @@ class Posts
     /**
      * setter for createdAt
      * @param \DateTimeInterface $createdAt
+     *
      * @return Posts
      */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
@@ -162,6 +179,7 @@ class Posts
     /**
      * setter for category
      * @param Category|null $category
+     *
      * @return Posts
      */
     public function setCategory(?Category $category): self
@@ -183,6 +201,7 @@ class Posts
     /**
      * Dodawanie komentarza
      * @param Comments $comment
+     *
      * @return Posts
      */
     public function addComment(Comments $comment): self
@@ -198,6 +217,7 @@ class Posts
     /**
      * Usuwanie komentarza
      * @param Comments $comment
+     *
      * @return Posts
      */
     public function removeComment(Comments $comment): self
