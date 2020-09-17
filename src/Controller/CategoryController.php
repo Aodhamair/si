@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Category controller
+ */
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -51,9 +53,9 @@ class CategoryController extends AbstractController
      *
      * @return Response
      */
-    public function index(CategoryRepository $repository)
+    public function index()
     {
-        $categories = $repository->findAll();
+        $categories = $this->categoryService->callFindAll();
 
         return $this->render('category/index.html.twig', ['categories' => $categories]);
     }

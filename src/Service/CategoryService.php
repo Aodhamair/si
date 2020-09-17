@@ -42,6 +42,15 @@ class CategoryService
     }
 
     /**
+     * Call Find All for controller.
+     * @return Category[]|array
+     */
+    public function callFindAll()
+    {
+        return $this->categoryRepository->findAll();
+    }
+
+    /**
      * Create paginated list.
      *
      * @param int $page Page number

@@ -16,6 +16,7 @@ class MainController extends AbstractController
     /**
      * Index
      * @Route("",name="index")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()

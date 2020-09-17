@@ -1,4 +1,7 @@
 <?php
+/**
+ * Post Controller
+ */
 
 namespace App\Controller;
 
@@ -100,9 +103,9 @@ class PostController extends AbstractController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function show(Posts $post, PostsRepository $postRepository, Request $request): Response
+    public function show(Posts $post, Request $request): Response
     {
-        $comments = $postRepository->PostComments($post);
+        $comments = $this->postsService->callPostComments($post);
         $comment = new Comments();
         $comment->setPost($post);
         $form = $this->createForm(CommentTypeForm::class, $comment);

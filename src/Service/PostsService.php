@@ -9,11 +9,12 @@ use App\Entity\Comments;
 use App\Entity\Posts;
 use App\Repository\CommentsRepository;
 use App\Repository\PostsRepository;
+use Doctrine\ORM\QueryBuilder;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class PostsService.
+ * Class PostsService
  */
 class PostsService
 {
@@ -104,6 +105,17 @@ class PostsService
     public function saveComment(Comments $comment): void
     {
         $this->commentsRepository->saveComment($comment);
+    }
+
+    /**
+     * Function callPostsComments.
+     * @param Posts $post
+     *
+     * @return QueryBuilder
+     */
+    public function callPostComments(Posts $post): QueryBuilder
+    {
+        return $this->postsRepository->PostComments($post);
     }
 
     /**

@@ -18,7 +18,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PostTypeForm extends AbstractType
 {
-    /**Build form function
+    /**
+     * Build form function
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
