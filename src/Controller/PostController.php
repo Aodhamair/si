@@ -43,7 +43,6 @@ class PostController extends AbstractController
      *  * Index action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\PostRepository            $repository PostRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator  Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
@@ -95,7 +94,6 @@ class PostController extends AbstractController
      *     methods={"GET","POST"},
      *     requirements={"id": "[1-9]\d*"})
      * @param Posts           $post
-     * @param PostsRepository $postRepository
      * @param Request         $request
      *
      * @return Response

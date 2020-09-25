@@ -49,8 +49,6 @@ class CategoryController extends AbstractController
      * Adding new category
      * @Route("/",name="category")
      *
-     * @param CategoryRepository $repository
-     *
      * @return Response
      */
     public function index()
